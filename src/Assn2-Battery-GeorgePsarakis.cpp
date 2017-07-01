@@ -1,5 +1,6 @@
 #include <iostream>
 #include <math.h>
+
 using namespace std;
 
 struct battery_t {
@@ -45,5 +46,9 @@ double power_device(battery_t battery, int seconds){
         calc = battery.currentStoredJoules - (lightAmp * seconds);
         return calc;
     }
+
+}
+
+double max_time(battery_t battery){
 
 }
