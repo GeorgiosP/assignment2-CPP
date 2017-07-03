@@ -14,7 +14,7 @@ double lightAmp = 4.0;
 
 double power_device(battery_t battery, int seconds);
 double max_time(battery_t, double); 
-double recharge(battery_t battery, int seconds);
+double recharge(battery_t battery);
 
 int main(){
     battery_t battery;
@@ -22,16 +22,38 @@ int main(){
 	int chargeTime;
 
     battery.voltage = 12.0;
-    battery.maxStorage = 5000; 
+    battery.maxStorage = 5 * pow(10,6); 
     battery.currentStoredJoules = battery.maxStorage;
 
     cout << "The battery before subtratction: " << battery.currentStoredJoules << endl;
 
     battery.currentStoredJoules = power_device(battery, 900); 
 
-    cout << "The battery after subtraction: " << battery.currentStoredJoules << endl;
+    cout << "Powering a 4 amp light for 15 minites, The battery after subtraction: " << battery.currentStoredJoules << endl;
+
+    timePowered = max_time(battery, 8);
+    cout << "The 8amp device can be power for " << timePowered << " seconds" << endl;
+
+    battery.currentStoredJoules = recharge(battery);
+    
+    timePowered = max_time(battery, 8);
+    cout << "The 8amp device can be power for " << timePowered << " seconds after the battery is charged" << endl;
+
+
 
     return 0;
+}
+
+double recharge(battery_t battery){
+
+    double whatisMax = battery.maxStorage;
+    
+
+    return whatisMax;
+}
+double max_time(battery_t battery, double current){
+    int numberOfSeconds = battery.currentStoredJoules / current; 
+    return numberOfSeconds;
 }   
 double power_device(battery_t battery, int seconds){
     
@@ -49,6 +71,3 @@ double power_device(battery_t battery, int seconds){
 
 }
 
-double max_time(battery_t battery){
-
-}
